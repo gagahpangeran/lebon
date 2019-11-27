@@ -11,9 +11,7 @@ async function getQuery(url, query) {
   });
 
   try {
-    console.log("hehe");
     const data = await endpoint.selectQuery(query);
-    console.log("huhu");
     const obj = await data.json();
     return obj.results.bindings;
   } catch (e) {
@@ -22,38 +20,26 @@ async function getQuery(url, query) {
 }
 
 export function useQuery(url) {
-  const [result, setResult] = React.useState({
-    data: null,
-    loading: false,
-    error: false
-  });
+  const [data, setData] = React.useState(null);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [isError, setIsError] = React.useState(false);
+  const [query, setQuery] = React.useState("");
 
-  // React.useEffect(() => {
-  //   async function fetchData() {
-  //     try {
-  //       const res = await getQuery(url, query);
-  //       setResult({ data: res, loading: false, error: false });
-  //     } catch {
-  //       setResult({ data: null, loading: false, error: true });
-  //     }
-  //   }
-  //   fetchData();
-  // }, [url, query]);
-
-  const fetchData = async query => {
-    console.log("kepanggil");
-    setResult(prevState => ({ ...prevState, loading: true }));
-    try {
-      console.log("hehe");
-      const res = await getQuery(url, query);
-      console.log(res);
-      setResult({ data: res, loading: false, error: false });
-    } catch {
-      setResult({ data: null, loading: false, error: true });
+  React.useEffect(() => {
+    async function fetchData() {
+      setIsLoading(true);
+      try {
+        const res = await getQuery(url, query);
+        setData(res);
+      } catch {
+        setIsError(true);
+      }
+      setIsLoading(false);
     }
-  };
+    fetchData();
+  }, [url, query]);
 
-  return [result, fetchData];
+  return [{ data, isLoading, isError }, setQuery];
 }
 
 export function createQuery(keyword) {
@@ -63,9 +49,11 @@ export function createQuery(keyword) {
   );
 
   const query = `
+  PREFIX ex: <http://example.org/>
+
   SELECT ?predicate ?object
   WHERE {
-    http://example.org/${escapeKeyword} ?predicate ?object
+    ex:${escapeKeyword} ?predicate ?object
   }
   `;
 
