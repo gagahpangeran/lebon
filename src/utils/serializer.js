@@ -25,5 +25,7 @@ export function serialize(data) {
       }))
   }));
 
-  return uniqBy(result, "title");
+  return uniqBy(result, "title").sort(({ title: t1 }, { title: t2 }) =>
+    t1 < t2 ? -1 : 1
+  );
 }

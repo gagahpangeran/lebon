@@ -19,11 +19,11 @@ export default function LandingPage() {
     }
 
     return data.map(({ title, props }) => (
-      <div key={title}>
+      <div key={title + props}>
         <h2>{title}</h2>
         <ul>
           {props.map(({ pred, obj }) => (
-            <li key={pred}>
+            <li key={pred + obj}>
               <strong>{pred}</strong> : <span>{obj}</span>
             </li>
           ))}

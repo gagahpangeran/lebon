@@ -28,11 +28,14 @@ export function useQuery(url) {
   React.useEffect(() => {
     async function fetchData() {
       setIsLoading(true);
+      setIsError(false);
       try {
         const res = await getQuery(url, query);
         setData(serialize(res));
-      } catch {
+      } catch (e) {
+        console.log(e);
         setIsError(true);
+        setData(null);
       }
       setIsLoading(false);
     }
@@ -65,7 +68,7 @@ export function createQuery(keyword) {
     UNION
     {
       ?subject ?predicate ?object .
-      FILTER regex(lcase(str(?object)), "${escapeKeyword}") .
+      FILTER (regex(lcase(str(?object)), "${escapeKeyword}") && regex(str(?predicate), str(lb:fullName))).
     }
   }
   `;
