@@ -1,7 +1,7 @@
 import React from "react";
 import SparqlHttp from "sparql-http-client";
 import fetch from "isomorphic-fetch";
-import startCase from "lodash-es/startCase";
+import { serialize } from "./serializer";
 
 async function getQuery(url, query) {
   SparqlHttp.fetch = fetch;
@@ -30,30 +30,43 @@ export function useQuery(url) {
       setIsLoading(true);
       try {
         const res = await getQuery(url, query);
-        setData(res);
+        setData(serialize(res));
       } catch {
         setIsError(true);
       }
       setIsLoading(false);
     }
-    fetchData();
+
+    if (query !== "") {
+      fetchData();
+    }
   }, [url, query]);
 
   return [{ data, isLoading, isError }, setQuery];
 }
 
 export function createQuery(keyword) {
-  const escapeKeyword = startCase(keyword.trim().toLowerCase()).replace(
-    / /g,
-    "_"
-  );
+  if (keyword === "") {
+    return keyword;
+  }
+
+  const escapeKeyword = keyword.trim().toLowerCase();
+  const escapeKeywordWithUnderscore = escapeKeyword.replace(/ /g, "_");
 
   const query = `
-  PREFIX ex: <http://example.org/>
+  PREFIX lb: <http://lebon.netlify.com/>
 
-  SELECT ?predicate ?object
+  SELECT DISTINCT ?subject ?predicate ?object
   WHERE {
-    ex:${escapeKeyword} ?predicate ?object
+    {
+      ?subject ?predicate ?object .
+      FILTER regex(lcase(str(?subject)), "${escapeKeywordWithUnderscore}") .
+    }
+    UNION
+    {
+      ?subject ?predicate ?object .
+      FILTER regex(lcase(str(?object)), "${escapeKeyword}") .
+    }
   }
   `;
 
