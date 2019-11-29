@@ -1,6 +1,7 @@
 import React from "react";
 import useForm from "react-hook-form";
 import { createQuery, useQuery } from "../utils/query";
+import SearchForm from "../components/SearchForm";
 
 export default function LandingPage() {
   const { handleSubmit, register } = useForm();
@@ -32,29 +33,9 @@ export default function LandingPage() {
     ));
   };
 
-  const randomName = () => {
-    const names = [
-      "Albert Einstein",
-      "Marie Curie",
-      "Mother Teresa",
-      "Robert Koch",
-      "Max Planck"
-    ];
-
-    return names[Math.floor(Math.random() * names.length)];
-  };
-
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <input
-          type="text"
-          name="search"
-          ref={register}
-          placeholder={randomName()}
-        />
-        <button type="submit">Search</button>
-      </form>
+      <SearchForm register={register} onSubmit={handleSubmit(onSubmit)} />
       {isLoading && <div>Loading...</div>}
       {isError && <div>Error!</div>}
       {!isLoading && data && renderData(data)}
