@@ -1,0 +1,21 @@
+.lebon-form {
+  display: block;
+}
+
+.lebon-input {
+  background: white;
+  border: 1px solid #aaa;
+  padding: 8px 16px;
+  font-size: 1.2em;
+  border-radius: 8px 0 0 8px;
+}
+
+.lebon-button {
+  background: var(--orange);
+  border: 1px solid var(--orange);
+  color: white;
+  font-weight: bold;
+  padding: 8px 16px;
+  font-size: 1.2em;
+  border-radius: 0 8px 8px 0;
+}

@@ -2,8 +2,10 @@ import React, { useEffect, useContext } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 
 import { LebonContext } from "../context/LebonContext";
-import SearchForm from "../components/SearchForm";
+import SearchBar from "../components/SearchBar";
 import ResultsSearch from "../components/ResultsSearch";
+
+import "./Search.style.css";
 
 function SearchPage() {
   const { actions } = useContext(LebonContext);
@@ -26,8 +28,8 @@ function SearchPage() {
   }, [query]);
 
   return (
-    <div>
-      <SearchForm />
+    <div className="search-page">
+      <SearchBar />
       <ResultsSearch />
     </div>
   );

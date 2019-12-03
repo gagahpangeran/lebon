@@ -1,0 +1,16 @@
+.lebon-searchbar {
+  display: flex;
+  padding: 16px;
+  background: var(--white);
+  border-bottom: 1px solid #aaa;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.lebon-searchbar h4 {
+  font-size: 32px;
+  color: var(--orange);
+  width: 112px;
+}

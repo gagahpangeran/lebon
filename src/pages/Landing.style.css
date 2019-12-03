@@ -1,0 +1,15 @@
+.landing-page {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: var(--white);
+}
+
+.landing-page h1 {
+  color: var(--orange);
+  font-size: 100px;
+  margin: -80px 0 20px;
+}
