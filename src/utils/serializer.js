@@ -4,7 +4,7 @@ export function serializeResultKeyword(data) {
   }
 
   const result = data.map(({ subject, fullName }) => ({
-    url: subject.value,
+    url: subject.value.replace("http://lebon.netlify.com", ""),
     name: fullName.value
   }));
 

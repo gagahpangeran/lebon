@@ -1,15 +1,8 @@
 import React, { useContext } from "react";
+import ResultBox from "./ResultBox";
 import { LebonContext } from "../context/LebonContext";
 
-import "./ResultSearch.style.css";
-
-const renderData = data => {
-  return data.map(({ url, name }) => (
-    <div key={url + name} className="lebon-result-link">
-      <h2>{name}</h2>
-    </div>
-  ));
-};
+import "./ResultsSearch.style.css";
 
 function ResultsSearch() {
   const { state } = useContext(LebonContext);
@@ -27,7 +20,13 @@ function ResultsSearch() {
     return <h3>Sorry, cant find it. Please try another keyword.</h3>;
   }
 
-  return <div className="lebon-results">{renderData(data)}</div>;
+  return (
+    <div className="lebon-results">
+      {data.map(data => (
+        <ResultBox key={data.name} {...data} />
+      ))}
+    </div>
+  );
 }
 
 export default ResultsSearch;
