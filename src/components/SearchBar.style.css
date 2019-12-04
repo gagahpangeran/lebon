@@ -9,8 +9,21 @@
   width: 100%;
 }
 
+.lebon-searchbar div {
+  width: 50%;
+  display: flex;
+}
+
 .lebon-searchbar h4 {
   font-size: 32px;
   color: var(--orange);
   width: 112px;
+}
+
+.lebon-searchbar .about {
+  justify-content: flex-end;
+}
+
+.lebon-searchbar .about h4 {
+  margin-right: 20px;
 }

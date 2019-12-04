@@ -1,11 +1,11 @@
 import React, { useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import { LebonContext } from "../context/LebonContext";
 import SearchForm from "../components/SearchForm";
+import { LebonContext } from "../context/LebonContext";
 
-import "./Landing.style.css";
+import "./NotFound.style.css";
 
-export default function LandingPage() {
+function NotFoundPage() {
   const { state, actions } = useContext(LebonContext);
 
   useEffect(() => {
@@ -15,11 +15,14 @@ export default function LandingPage() {
   });
 
   return (
-    <div className="landing-page">
-      <h1>
-        <Link to="/about">Lebon</Link>
-      </h1>
+    <div className="not-found-page">
+      <h1>404 Not Found</h1>
+      <div className="link">
+        You can <Link to="/">back to home</Link> or search bellow
+      </div>
       <SearchForm />
     </div>
   );
 }
+
+export default NotFoundPage;

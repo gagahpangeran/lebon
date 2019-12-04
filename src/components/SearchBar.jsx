@@ -7,10 +7,17 @@ import "./SearchBar.style.css";
 function SearchBar() {
   return (
     <nav className="lebon-searchbar">
-      <h4>
-        <Link to="/">Lebon</Link>
-      </h4>
-      <SearchForm />
+      <div className="search">
+        <h4>
+          <Link to="/">Lebon</Link>
+        </h4>
+        <SearchForm />
+      </div>
+      <div className="about">
+        <h4>
+          <Link to="/about">About</Link>
+        </h4>
+      </div>
     </nav>
   );
 }

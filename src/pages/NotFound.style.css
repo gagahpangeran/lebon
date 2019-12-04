@@ -1,0 +1,19 @@
+.not-found-page {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: var(--white);
+}
+
+.not-found-page h1 {
+  font-size: 80px;
+  margin: -80px 0 20px;
+}
+
+.not-found-page .link {
+  font-size: 24px;
+  margin-bottom: 20px;
+}

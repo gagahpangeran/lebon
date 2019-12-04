@@ -1,0 +1,47 @@
+.about-page {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: var(--white);
+}
+
+.about-page h1 {
+  font-size: 64px;
+}
+
+.about-page h2 {
+  font-size: 48px;
+}
+
+.about-page h3 {
+  font-size: 40px;
+}
+
+.about-page h4 {
+  font-size: 20px;
+}
+
+.about-page img {
+  display: block;
+  max-width: 200px;
+  border-radius: 50%;
+  margin: 24px;
+  border: 1px solid black;
+}
+
+.about-page .lebon-developer {
+  display: flex;
+}
+
+.about-page .lebon-developer .dev {
+  margin: 0 20px;
+  text-align: center;
+}
+
+.about-page .lebon-link {
+  margin: 20px 0;
+  font-size: 24px;
+}
