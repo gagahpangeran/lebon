@@ -17,7 +17,7 @@ export async function getQuery(url, query) {
   }
 }
 
-export function createQuery(keyword) {
+export function createQueryFromKeyword(keyword) {
   if (keyword === "") {
     return keyword;
   }
@@ -28,16 +28,13 @@ export function createQuery(keyword) {
   const query = `
   PREFIX lb: <http://lebon.netlify.com/>
 
-  SELECT DISTINCT ?subject ?predicate ?object
+  SELECT DISTINCT ?subject ?fullName
   WHERE {
     {
       ?subject ?predicate ?object .
+      ?subject lb:gotLaureates ?object .
+      ?subject lb:fullName ?fullName
       FILTER regex(lcase(str(?subject)), "${escapeKeywordWithUnderscore}") .
-    }
-    UNION
-    {
-      ?subject ?predicate ?object .
-      FILTER (regex(lcase(str(?object)), "${escapeKeyword}") && regex(str(?predicate), str(lb:fullName))).
     }
   }
   `;

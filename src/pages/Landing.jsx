@@ -11,7 +11,7 @@ export default function LandingPage() {
     if (state.query !== "") {
       actions.setQuery("");
     }
-  }, [state.query]);
+  });
 
   return (
     <div className="landing-page">

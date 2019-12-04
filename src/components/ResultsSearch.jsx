@@ -1,17 +1,12 @@
 import React, { useContext } from "react";
 import { LebonContext } from "../context/LebonContext";
 
+import "./ResultSearch.style.css";
+
 const renderData = data => {
-  return data.map(({ title, props }) => (
-    <div key={title + props}>
-      <h2>{title}</h2>
-      <ul>
-        {props.map(({ pred, obj }) => (
-          <li key={pred + obj}>
-            <strong>{pred}</strong> : <span>{obj}</span>
-          </li>
-        ))}
-      </ul>
+  return data.map(({ url, name }) => (
+    <div key={url + name} className="lebon-result-link">
+      <h2>{name}</h2>
     </div>
   ));
 };
@@ -20,19 +15,19 @@ function ResultsSearch() {
   const { state } = useContext(LebonContext);
   const { isLoading, isError, data } = state;
 
-  if (isLoading || data === null) {
-    return <div>Loading...</div>;
+  if (isError) {
+    return <h3>Error! Sorry, there's something wrong :(</h3>;
   }
 
-  if (isError) {
-    return <div>Error</div>;
+  if (isLoading || data === null) {
+    return <h3>Loading...</h3>;
   }
 
   if (data.length === 0) {
-    return <div>Sorry, cant find it. Please try another keyword.</div>;
+    return <h3>Sorry, cant find it. Please try another keyword.</h3>;
   }
 
-  return <div>{renderData(data)}</div>;
+  return <div className="lebon-results">{renderData(data)}</div>;
 }
 
 export default ResultsSearch;
