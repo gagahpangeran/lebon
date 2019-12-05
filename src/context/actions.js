@@ -17,6 +17,7 @@ export const useActions = (state, dispatch) => {
           "https://fuseki.gagahpangeran.com/nobel/sparql",
           sparqlQuery
         );
+        serializeResultKeyword(result);
         dispatch({
           type: types.SET_DATA,
           payload: serializeResultKeyword(result)

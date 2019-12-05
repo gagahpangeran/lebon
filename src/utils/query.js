@@ -22,19 +22,28 @@ export function createQueryFromKeyword(keyword) {
     return keyword;
   }
 
-  const escapeKeyword = keyword.trim().toLowerCase();
-  const escapeKeywordWithUnderscore = escapeKeyword.replace(/ /g, "_");
+  const modifiedKeyword = `.*${keyword
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z]/g, ".*")}.*`;
 
   const query = `
   PREFIX lb: <http://lebon.netlify.com/>
-
-  SELECT DISTINCT ?subject ?fullName
+  PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+  
+  SELECT DISTINCT ?subject ?fullName ?motivation ?field
   WHERE {
+    FILTER regex(lcase(str(?fullName)), "${modifiedKeyword}") .
     {
-      ?subject ?predicate ?object .
-      ?subject lb:gotLaureates ?object .
-      ?subject lb:fullName ?fullName
-      FILTER regex(lcase(str(?subject)), "${escapeKeywordWithUnderscore}") .
+      ?subject lb:fullName ?fullName .
+    }
+    OPTIONAL
+    {
+      ?subject lb:gotLaureates/lb:motivation ?motivation .
+    }
+    OPTIONAL
+    {
+    ?subject lb:gotLaureates/lb:hasNobelCategory/rdfs:label ?field .
     }
   }
   `;
