@@ -1,6 +1,13 @@
 import { types } from "./reducers";
-import { getQuery, createQueryFromKeyword } from "../utils/query";
-import { serializeResultKeyword } from "../utils/serializer";
+import {
+  getQuery,
+  createQueryFromKeyword,
+  createQueryFromURI
+} from "../utils/query";
+import {
+  serializeResultKeyword,
+  serializeResultURI
+} from "../utils/serializer";
 
 export const useActions = (state, dispatch) => {
   function setQuery(query) {
@@ -17,7 +24,6 @@ export const useActions = (state, dispatch) => {
           "https://fuseki.gagahpangeran.com/nobel/sparql",
           sparqlQuery
         );
-        serializeResultKeyword(result);
         dispatch({
           type: types.SET_DATA,
           payload: serializeResultKeyword(result)
@@ -29,8 +35,28 @@ export const useActions = (state, dispatch) => {
     }
   }
 
+  async function getDataFromURI(uri) {
+    dispatch({ type: types.SET_LOADING });
+    const sparqlQuery = createQueryFromURI(uri);
+
+    try {
+      const result = await getQuery(
+        "https://fuseki.gagahpangeran.com/nobel/sparql",
+        sparqlQuery
+      );
+      dispatch({
+        type: types.SET_DATA_PAGE,
+        payload: serializeResultURI(result)
+      });
+    } catch (e) {
+      console.log(e);
+      dispatch({ type: types.SET_ERROR });
+    }
+  }
+
   return {
     setQuery,
-    getDataFromQuery
+    getDataFromQuery,
+    getDataFromURI
   };
 };

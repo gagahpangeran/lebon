@@ -5,6 +5,7 @@ import { LebonProvider } from "./context/LebonContext";
 import LandingPage from "./pages/Landing";
 import SearchPage from "./pages/Search";
 import AboutPage from "./pages/About";
+import PagePage from "./pages/Page";
 import NotFoundPage from "./pages/NotFound";
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" component={LandingPage} exact={true} />
           <Route path="/search" component={SearchPage} exact={true} />
           <Route path="/about" component={AboutPage} exact={true} />
+          <Route path="/page/:uri" component={PagePage} exact={true} />
           <Route component={NotFoundPage} />
         </Switch>
       </BrowserRouter>

@@ -1,7 +1,25 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
-function PagePage(props) {
-  return <div></div>;
+import { LebonContext } from "../context/LebonContext";
+import SearchBar from "../components/SearchBar";
+
+function PagePage() {
+  const { uri } = useParams();
+  const { state, actions } = useContext(LebonContext);
+
+  useEffect(() => {
+    async function fetchData() {
+      await actions.getDataFromURI(uri);
+    }
+    fetchData();
+  }, [uri]);
+
+  return (
+    <div className="page-page">
+      <SearchBar />
+    </div>
+  );
 }
 
 export default PagePage;
