@@ -56,12 +56,9 @@ export function serializeResultURI(data) {
     name: name.obj,
     thumbnail: thumbnail && thumbnail.obj,
     data: result
-      .filter(
-        ({ pred }) =>
-          pred !== "thumbnail" &&
-          pred !== "http://www.w3.org/2002/07/owl#sameAs"
-      )
+      .filter(({ pred }) => pred !== "thumbnail" && !pred.includes("http://"))
       .map(({ pred, obj }) => ({ pred: startCase(pred), obj }))
+      .sort(({ pred: p1 }, { pred: p2 }) => (p1 < p2 ? -1 : 1))
   };
 
   return finalResult;
