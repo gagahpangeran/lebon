@@ -19,11 +19,19 @@ export function serializeResultKeyword(data) {
   const result = data.map(({ subject, fullName, field, motivation }) => ({
     url: subject.value.replace("http://lebon.netlify.com", "/page"),
     name: fullName ? fullName.value : "-",
-    field: field ? field.value : "-",
-    motivation: motivation ? motivation.value : "-"
+    field: uniqBy(
+      data
+        .filter(({ subject: s }) => s.value === subject.value)
+        .map(({ field: f }) => (f ? f.value : ""))
+    ).join(" & "),
+    motivation: uniqBy(
+      data
+        .filter(({ subject: s }) => s.value === subject.value)
+        .map(({ motivation: m }) => (m ? m.value : ""))
+    ).join(" & ")
   }));
 
-  return result.sort(({ name: name1 }, { name: name2 }) =>
+  return uniqBy(result, "url").sort(({ name: name1 }, { name: name2 }) =>
     name1 < name2 ? -1 : 1
   );
 }

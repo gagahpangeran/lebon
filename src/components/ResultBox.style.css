@@ -1,3 +1,6 @@
 .lebon-result-link {
   margin-bottom: 20px;
+  border: 1px solid black;
+  padding: 20px 40px;
+  border-radius: 20px;
 }

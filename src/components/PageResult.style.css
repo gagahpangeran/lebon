@@ -1,0 +1,14 @@
+.page-result {
+  max-width: 50%;
+  border: 1px solid black;
+  padding: 20px 40px;
+  border-radius: 20px;
+}
+
+.page-result h1 {
+  font-size: 64px;
+}
+
+.page-result img {
+  margin: 20px 0;
+}

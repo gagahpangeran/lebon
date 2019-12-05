@@ -102,7 +102,7 @@ export function createQueryFromURI(uri) {
 		WHERE {
 			?s ?p ?o .
 			?s owl:sameAs ?same .
-			FILTER (<http://lebon.netlify.com/Albert_Einstein> = ?s)
+			FILTER (<http://lebon.netlify.com/${uri}> = ?s)
 		}
 	}
   }
