@@ -10,8 +10,15 @@
 }
 
 .lebon-searchbar div {
-  width: 50%;
   display: flex;
+}
+
+.lebon-searchbar div.search {
+  width: calc(100% - 15px);
+}
+
+.lebon-searchbar div.about {
+  width: 150px;
 }
 
 .lebon-searchbar h4 {
