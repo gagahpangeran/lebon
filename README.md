@@ -1,8 +1,10 @@
-# Nobel Laureates Search Engine
+# Lebon - Nobel Laureates Search Engine Using Semantic Web
 
-Final project of semantic web course.
+Final project of semantic web course by Querying With You.
 
 ## Querying With You
+
+![Querying With You](https://files.catbox.moe/wtn923.png)
 
 - Gagah Pangeran Rosfatiputra - 170639566
 - Muhamad Abdurahman - 1706040095
